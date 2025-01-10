@@ -39,7 +39,7 @@ const data = [
 
 export default function Report() {
     return (
-        <div className="px-6 lg:px-80" >
+        <div className="px-6 lg:px-80" id="report">
             <h2 className="mt-2 text-pretty text-3xl font-semibold tracking-tight leading-tight text-gray-900 sm:text-4xl mb-4">
                 Laporan Saldo Infaq Masjid
             </h2>

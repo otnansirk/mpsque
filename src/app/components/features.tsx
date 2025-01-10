@@ -33,7 +33,7 @@ const data = [
 export default function Features() {
     return (
         <div className="grid place-items-center w-full">
-            <div className="bg-white bg-opacity-40 backdrop-blur rounded-xl flex sm:flex-row flex-col gap-12 sm:gap-0 justify-around p-4 sm:w-4/5 w-[360px] h-auto mt-[-80px] z-50 m-center">
+            <div className="bg-white bg-opacity-40 backdrop-blur rounded-xl flex sm:flex-row flex-col gap-12 sm:gap-0 justify-around p-4 sm:max-w-7xl mx-auto w-max-[360px] h-auto mt-[-80px] z-50 m-center">
             {
                 data.map(item => (
                     <div key={item.title} className='text-center text-gray-500'>

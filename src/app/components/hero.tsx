@@ -6,17 +6,17 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 
 const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
+  { name: 'Home', href: '#home' },
+  { name: 'Profile', href: '#about' },
+  { name: 'Jadwal Sholat', href: '#about' },
+  { name: 'Laporan Keuangan', href: '#report' },
 ]
 
 export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className="bg-gray-900 z-0">
+    <div className="bg-gray-900 z-0" id="home">
       <header className="absolute inset-x-0 top-0 z-50">
         <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-14">
           <div className="flex lg:flex-1">
