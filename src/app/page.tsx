@@ -10,6 +10,7 @@ export default function Home() {
       <Features/>
       <Quote/>
       <About/>
+      <div className="p-[200px]"></div>
     </div>
   );
 }
