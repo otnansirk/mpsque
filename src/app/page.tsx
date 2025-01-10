@@ -1,3 +1,4 @@
+import About from "./components/about";
 import Features from "./components/features";
 import Hero from "./components/hero";
 import Quote from "./components/Quote";
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero/>
       <Features/>
       <Quote/>
+      <About/>
     </div>
   );
 }
