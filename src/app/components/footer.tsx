@@ -28,10 +28,10 @@ const navigation = [
               </a>
             ))}
           </div>
-          <p className="mt-8 text-sm/6 text-gray-100 md:order-1 md:mt-0">
+          <div className="mt-8 text-sm/6 text-gray-100 md:order-1 md:mt-0">
             <h2 className="text-2xl font-bold">ALAMAT MASJID</h2>
             Jl. Sampung No. 36, Ponorogo, Ponorogo, Jawa Timur
-          </p>
+          </div>
         </div>
       </footer>
     )
