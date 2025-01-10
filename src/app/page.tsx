@@ -1,7 +1,9 @@
 import About from "./components/about";
 import Features from "./components/features";
+import Footer from "./components/footer";
 import Hero from "./components/hero";
 import Quote from "./components/Quote";
+import Report from "./components/report";
 
 export default function Home() {
   return (
@@ -10,7 +12,8 @@ export default function Home() {
       <Features/>
       <Quote/>
       <About/>
-      <div className="p-[200px]"></div>
+      <Report/>
+      <Footer/>
     </div>
   );
 }
