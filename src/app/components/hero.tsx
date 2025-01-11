@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
-import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Dialog, DialogPanel } from '@headlessui/react'
+import { useCookies } from 'next-client-cookies'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -15,7 +16,13 @@ const navigation = [
 
 export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isSignin, setIsSignin] = useState(false)
 
+  const cookies = useCookies()
+
+  useEffect(() => {
+    setIsSignin(!!cookies.get('_Access_Token'))
+  },[cookies])
   return (
     <div className="bg-gray-900 z-0" id="home">
       <header className="absolute inset-x-0 top-0 z-50">
@@ -43,9 +50,15 @@ export default function Hero() {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link href={'/signin'} className="text-sm/6 font-semibold text-white">
-              Log in<span aria-hidden="true">&rarr;</span>
-            </Link>
+            {
+              isSignin
+              ? <Link href={'/dashboard'} className="text-sm/6 font-semibold text-white">
+                  Dashboard<span aria-hidden="true">&rarr;</span>
+                </Link>
+              : <Link href={'/signin'} className="text-sm/6 font-semibold text-white">
+                  Log in<span aria-hidden="true">&rarr;</span>
+                </Link>
+            }
           </div>
         </nav>
         <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -78,11 +91,19 @@ export default function Hero() {
                   ))}
                 </div>
                 <div className="py-6">
-                  <Link href={'/signin'} 
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-black hover:bg-gray-300"
-                  >
-                    Log in
-                  </Link>
+                  {
+                    isSignin 
+                    ? <Link href={'/dashboard'} 
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-black hover:bg-gray-300"
+                      >
+                        Dashboard
+                      </Link>
+                    : <Link href={'/signin'} 
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-black hover:bg-gray-300"
+                      >
+                        Log in
+                      </Link>
+                  }
                 </div>
               </div>
             </div>
