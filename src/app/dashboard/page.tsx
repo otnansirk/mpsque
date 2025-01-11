@@ -1,6 +1,7 @@
 'use client'
 
 import { ArrowDownCircleIcon, ArrowUpCircleIcon, TrashIcon, HomeIcon } from "@heroicons/react/20/solid";
+import { useCookies } from "next-client-cookies";
 import { redirect } from "next/navigation";
 import { RedirectType } from "next/navigation";
 import { JSX, useEffect, useState } from "react";
@@ -49,52 +50,66 @@ export default function Dashboard() {
     });
     const [error, setError] = useState<string | null>(null);
 
+    const cookies = useCookies()
+
     const onOutcomeHandler = async () => {
-        setIsPostDataLoading(true);
-        setError(null);
-
-        const response = await fetch('/api/transactions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                amount,
-                description,
-                type: 'outcome'
-            })
-        })
-
-        const result = await response.json();
-        setIsPostDataLoading(false)
-
-        if (!response.ok) {
-            setError(result.message || 'An error occurred');
+        try {
+            setIsPostDataLoading(true);
+            setError(null);
+    
+            const response = await fetch('/api/transactions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    amount,
+                    description,
+                    type: 'outcome'
+                })
+            });
+    
+            const result = await response.json();
+            if (!response.ok) {
+                setError(result.message || 'An error occurred');
+            }
+        } catch (error) {
+            console.error('Error posting outcome:', error);
+            setError('Failed to post outcome');
+        } finally {
+            setIsPostDataLoading(false);
         }
     }
 
     const onIncomeHandler = async () => {
-
-        setIsPostDataLoading(true);
-        setError(null);
-
-        const response = await fetch('/api/transactions', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                amount,
-                description,
-                type: 'income'
+        try {
+            setIsPostDataLoading(true);
+            setError(null);
+    
+            const response = await fetch('/api/transactions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    amount,
+                    description,
+                    type: 'income'
+                })
             })
-        })
+    
+            const result = await response.json();
+            setIsPostDataLoading(false)
+    
+            if (!response.ok) {
+                setError(result.message || 'An error occurred');
+            }
 
-        const result = await response.json();
-        setIsPostDataLoading(false)
-
-        if (!response.ok) {
-            setError(result.message || 'An error occurred');
+        } catch (error) {
+            console.error('Error posting income:', error);
+            setError('Failed to post income');
+        } finally {
+            setIsPostDataLoading(false);
         }
     }
 
@@ -122,28 +137,32 @@ export default function Dashboard() {
     useEffect(() => {
 
         const fetchData = async () => {
-
-            setIsFetchDataLoading(true);
-            setError(null);
-
-            const params = new URLSearchParams(filters);
-
-            const response = await fetch(`/api/transactions?${params.toString()}`, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
+            try {
+                setIsFetchDataLoading(true);
+                setError(null);
+    
+                const params = new URLSearchParams(filters);
+                const response = await fetch(`/api/transactions?${params.toString()}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+    
+                const result = await response.json();
+    
+                if (!response.ok) {
+                    setError(result.message || 'An error occurred');
+                } else {
+                    setTrxData(result.data ?? []);
                 }
-            })
-            const result = await response.json();
-            
-            if (!response.ok) {
-                setError(result.message || 'An error occurred');
-            } else {
-                setTrxData(result.data ?? [])
+            } catch (error) {
+                console.error('Error fetching data:', error); // Logging the error
+                setError('Failed to fetch transaction data');
+            } finally {
+                setIsFetchDataLoading(false);
             }
-
-            setIsFetchDataLoading(false);
-        }
+        };
 
         if (filters.start_date && filters.end_date && !isPostDataLoading) {
             fetchData();
@@ -171,10 +190,20 @@ export default function Dashboard() {
 
     return (
         <div className="container m-auto pt-6 max-w-xl px-4">
-            <div
-                onClick={() => redirect("/", RedirectType.push)} 
-                className="flex items-end gap-2 mb-3 font-semibold text-gray-500 cursor-pointer inline-block" >
-                <HomeIcon className="w-8 h-8"/> <span>{process.env.NEXT_PUBLIC_APP_NAME}</span>
+            <div className="flex justify-between mb-3">
+                <div
+                    onClick={() => redirect("/", RedirectType.push)} 
+                    className="flex items-end gap-2 font-semibold text-gray-500 cursor-pointer inline-block" >
+                    <HomeIcon className="w-8 h-8"/> <span>{process.env.NEXT_PUBLIC_APP_NAME}</span>
+                </div>
+                <div
+                    onClick={() => {
+                        cookies.remove('_Access_Token')
+                        redirect("/", RedirectType.push)
+                    }} 
+                    className="font-semibold text-red-500 cursor-pointer text-sm" >
+                        Log Out
+                </div>
             </div>
             <div className="-space-y-px">
                 <div className="rounded-t-md bg-white px-3 pb-1.5 pt-2.5 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:relative focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
