@@ -155,7 +155,19 @@ export default function Report({canDelete = false, isRefetch = false}) {
                     className="ring-1 ring-gray-300 rounded-md outline outline-1 -outline-offset-1 outline-gray-300 block min-w-0 grow py-1.5 px-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6 font-bold"
                 />
             </div>
+            {
+                trxData.length && <div className='text-gray-700 font-bold mb-5 text-lg'>
+                    <span className='text-gray-500'>Total Saldo :</span> {
+                    new Intl.NumberFormat('id-ID').format(
+                        trxData.map(item => item.amount)
+                            .reduce((accumulator, amount) => accumulator + amount
+                            )
+                        )
+                    }
+                </div>
+            }
             <div className="max-h-[600px] overflow-y-scroll sm:px-4">
+                {!trxData.length && !isFetchDataLoading && <p className="text-gray-500 text-center font-bold">Tidak ada data yang ditampilkan</p>}
                 {
                     isFetchDataLoading && !error
                         ? <p className="animate-bounce text-gray-500 text-center font-bold">Loading...</p>
@@ -168,7 +180,7 @@ export default function Report({canDelete = false, isRefetch = false}) {
                                         </div>
                                         <div className="min-w-0 flex-auto">
                                             <p className={`text-md font-bold text-gray-900 ${item.type === 'income' ? 'text-green-600' : 'text-red-600'}`}>
-                                                {item.type === 'income' ? '+' : '-'} {new Intl.NumberFormat('id-ID').format(item.amount)}
+                                                {new Intl.NumberFormat('id-ID').format(item.amount)}
                                             </p>
                                             <p className="mt-1 text-xs/5 text-gray-500">{item.description}</p>
                                         </div>

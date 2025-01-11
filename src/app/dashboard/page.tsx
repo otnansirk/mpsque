@@ -9,7 +9,7 @@ import Report from "../components/report";
 
 export default function Dashboard() {
 
-    const [amount, setAmount] = useState('');
+    const [amount, setAmount] = useState(0);
     const [description, setDescription] = useState('');
     const [isPostDataLoading, setIsPostDataLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -27,7 +27,7 @@ export default function Dashboard() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    amount,
+                    amount: amount*-1,
                     description,
                     type: 'outcome'
                 })
@@ -103,7 +103,7 @@ export default function Dashboard() {
                         <div className="flex items-center rounded-md bg-white px-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
                             <div className="shrink-0 select-none text-base text-gray-500 sm:text-sm/6">Rp.</div>
                             <input
-                                onChange={ev => setAmount(ev.target.value)}
+                                onChange={ev => setAmount(parseInt(ev.target.value))}
                                 id="price"
                                 name="price"
                                 type="number"
