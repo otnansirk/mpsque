@@ -21,9 +21,7 @@ export async function POST(req: NextRequest) {
 
     const access_token = data.session.access_token;
     const refresh_token = data.session.refresh_token
-    const eee = await api.auth.setSession({access_token, refresh_token})
-    console.log("KRIS SIGN", eee);
-    console.log("KRIS SIGN 2", data);
+    await api.auth.setSession({access_token, refresh_token})
     
     return NextResponse.json({ access_token }, { status:200 });
 
