@@ -5,7 +5,7 @@ import { useCookies } from "next-client-cookies";
 import { redirect } from "next/navigation";
 import { RedirectType } from "next/navigation";
 import { useState } from "react";
-import Report from "../components/report";
+import Report from "@/app/components/report";
 
 export default function Dashboard() {
 
