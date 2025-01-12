@@ -48,7 +48,7 @@ export default function About() {
                         <div style={{ position: 'relative', width: '100%'}}>
                             <iframe
                                 src="https://jadwalsholat.org/jadwal-sholat/monthly.php?id=265"
-                                height={850}
+                                height={880}
                                 width={380}
                                 title="Jadwal Sholat"
                                 className='w-full shadow-2xl rounded-tr-lg rounded-bl-[50px]'

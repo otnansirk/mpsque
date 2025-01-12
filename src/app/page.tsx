@@ -1,7 +1,7 @@
 import Hero from "./components/hero";
 import Features from "./components/features";
 import About from "./components/about";
-// import Quote from "./components/quote";
+import Quote from "./components/quote";
 import Report from "./components/report";
 import Footer from "./components/footer";
 
@@ -11,7 +11,7 @@ export default function Home() {
       <Hero/>
       <Features/>
       <About/>
-      {/* <Quote/> */}
+      <Quote/>
       <Report/>
       <Footer/>
     </div>
