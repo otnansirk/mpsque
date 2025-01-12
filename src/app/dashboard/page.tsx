@@ -1,11 +1,11 @@
 'use client'
 
 import { HomeIcon } from "@heroicons/react/20/solid";
-import { useCookies } from "next-client-cookies";
 import { redirect } from "next/navigation";
 import { RedirectType } from "next/navigation";
 import { useState } from "react";
 import Report from "@/app/components/report";
+import useCookies from "@/hooks/useCookies";
 
 export default function Dashboard() {
 
@@ -13,7 +13,6 @@ export default function Dashboard() {
     const [description, setDescription] = useState('');
     const [isPostDataLoading, setIsPostDataLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-
     const cookies = useCookies()
 
     const onOutcomeHandler = async () => {
