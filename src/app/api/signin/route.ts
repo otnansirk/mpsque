@@ -1,4 +1,5 @@
 import ClientAPI from '@/libs/api';
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
@@ -22,6 +23,9 @@ export async function POST(req: NextRequest) {
     const access_token = data.session.access_token;
     const refresh_token = data.session.refresh_token
     await api.auth.setSession({access_token, refresh_token})
+    ;(await cookies()).set('_Access_Token', access_token, {
+      maxAge: 30// 7 days left
+    })
     
     return NextResponse.json({ access_token }, { status:200 });
 

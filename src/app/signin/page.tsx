@@ -1,6 +1,5 @@
 'use client'
 
-import { useCookies } from "next-client-cookies";
 import { redirect, RedirectType } from "next/navigation";
 import React, { useState } from "react";
 
@@ -9,7 +8,6 @@ export default function Signin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const cookies = useCookies()
 
   const signinHanlder = async (ev: React.FormEvent) => {
 
@@ -31,9 +29,6 @@ export default function Signin() {
     if (!response.ok) {
       setError(result.message || 'An error occurred');
     } else {
-      cookies.set('_Access_Token', result.access_token, {
-        expires: 7, // 7 days left
-      })
       redirect('/dashboard', RedirectType.push)
     }
   }
