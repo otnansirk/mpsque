@@ -2,10 +2,10 @@
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Dialog, DialogPanel } from '@headlessui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import useCookies from '@/hooks/useCookies'
 import Image from 'next/image'
 import Link from 'next/link'
-import * as cookies from '@/libs/cookies'
 
 const navigation = [
   { name: 'Home', href: '#home' },
@@ -13,10 +13,13 @@ const navigation = [
   { name: 'Jadwal Sholat', href: '#about' },
   { name: 'Laporan Keuangan', href: '#report' },
 ]
-
 export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const isSignin = !!cookies.get("_Access_Token")
+  const [isSignin, setIsSignin] = useState(false);
+  const cookies = useCookies("_Access_Token")
+  useEffect(() => {
+      setIsSignin(!!cookies);
+  }, [cookies]);
 
   return (
     <div className="bg-gray-900 z-0" id="home">
@@ -47,10 +50,10 @@ export default function Hero() {
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             {
               isSignin
-              ? <Link href={'/dashboard'} className="text-sm/6 font-semibold text-white">
+                ? <Link href={'/dashboard'} className="text-sm/6 font-semibold text-white">
                   Dashboard<span aria-hidden="true">&rarr;</span>
                 </Link>
-              : <Link href={'/signin'} className="text-sm/6 font-semibold text-white">
+                : <Link href={'/signin'} className="text-sm/6 font-semibold text-white">
                   Log in<span aria-hidden="true">&rarr;</span>
                 </Link>
             }
@@ -87,13 +90,13 @@ export default function Hero() {
                 </div>
                 <div className="py-6">
                   {
-                    isSignin 
-                    ? <Link href={'/dashboard'} 
+                    isSignin
+                      ? <Link href={'/dashboard'}
                         className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-black hover:bg-gray-300"
                       >
                         Dashboard
                       </Link>
-                    : <Link href={'/signin'} 
+                      : <Link href={'/signin'}
                         className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-black hover:bg-gray-300"
                       >
                         Log in
@@ -129,8 +132,8 @@ export default function Hero() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
             <div className="text-center">
-              <h1 className="text-balance text-5xl font-semibold tracking-tight text-white sm:text-7xl sm:leading-tight" style={{textShadow: "6px 5px 4px rgba(0, 0, 0, 0.41)"}}>
-                MASJID <br/>
+              <h1 className="text-balance text-5xl font-semibold tracking-tight text-white sm:text-7xl sm:leading-tight" style={{ textShadow: "6px 5px 4px rgba(0, 0, 0, 0.41)" }}>
+                MASJID <br />
                 AL-AMIIN PONOROGO
               </h1>
             </div>
