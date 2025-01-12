@@ -1,4 +1,5 @@
-import ClientAPI from '@/libs/api';
+// import ClientAPI from '@/libs/api';
+import ClientAPI from 'libs/api';
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 

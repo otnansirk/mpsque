@@ -1,4 +1,6 @@
-import ClientAPI from '@/libs/api';
+// import ClientAPI from '@/libs/api';
+import ClientAPI from 'libs/api';
+
 import { NextRequest, NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';

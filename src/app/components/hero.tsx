@@ -3,9 +3,10 @@
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { useEffect, useState } from 'react'
-import useCookies from '@/hooks/useCookies'
+// import useCookies from '@/hooks/useCookies'
 import Image from 'next/image'
 import Link from 'next/link'
+import useCookies from 'hooks/useCookies'
 
 const navigation = [
   { name: 'Home', href: '#home' },

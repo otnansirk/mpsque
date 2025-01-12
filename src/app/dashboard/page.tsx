@@ -4,8 +4,10 @@ import { HomeIcon } from "@heroicons/react/20/solid";
 import { redirect } from "next/navigation";
 import { RedirectType } from "next/navigation";
 import { useState } from "react";
-import Report from "@/app/components/report";
-import useCookies from "@/hooks/useCookies";
+// import Report from "@/app/components/report";
+import useCookies from "hooks/useCookies";
+import Report from "app/components/report";
+// import useCookies from "@/hooks/useCookies";
 
 export default function Dashboard() {
 
