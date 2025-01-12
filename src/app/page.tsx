@@ -1,9 +1,9 @@
-import Hero from "@/app/components/hero";
-import Features from "@/app/components/features";
-import About from "@/app/components/about";
-import Quote from "@/app/components/quote";
-import Report from "@/app/components/report";
-import Footer from "@/app/components/footer";
+import Hero from "./components/hero";
+import Features from "./components/features";
+import About from "./components/about";
+import Quote from "./components/quote";
+import Report from "./components/report";
+import Footer from "./components/footer";
 
 export default function Home() {
   return (
