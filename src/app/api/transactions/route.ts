@@ -1,6 +1,8 @@
 import ClientAPI from '@/libs/api';
 import { NextRequest, NextResponse } from 'next/server';
 
+export const runtime = 'nodejs';
+
 export async function POST(req: NextRequest) {
     const { amount, description, type } = await req.json();
     try {

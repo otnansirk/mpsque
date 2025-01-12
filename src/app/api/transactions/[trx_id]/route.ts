@@ -1,6 +1,8 @@
 import ClientAPI from "@/libs/api";
 import { NextRequest, NextResponse } from "next/server";
 
+export const runtime = 'nodejs';
+
 
 export async function DELETE(req: NextRequest, { params } : { params: Promise<{trx_id: string}> }) {
     const transaction_id = (await params).trx_id;
