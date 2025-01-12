@@ -1,5 +1,5 @@
 import Hero from "./components/hero";
-// import Features from "./components/features";
+import Features from "./components/features";
 // import About from "./components/about";
 // import Quote from "./components/quote";
 // import Report from "./components/report";
@@ -9,11 +9,11 @@ export default function Home() {
   return (
     <div className="">sadasd
       <Hero/>
-      {/* <Features/>
-      <About/>
-      <Quote/>
-      <Report/>
-      <Footer/> */}
+      <Features/>
+      {/* <About/> */}
+      {/* <Quote/> */}
+      {/* <Report/> */}
+      {/* <Footer/> */}
     </div>
   );
 }
