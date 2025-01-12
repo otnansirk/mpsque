@@ -16,10 +16,10 @@ const navigation = [
 export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isSignin, setIsSignin] = useState(false);
-  const cookies = useCookies("_Access_Token")
+  const cook = useCookies("_Access_Token")
   useEffect(() => {
-      setIsSignin(!!cookies);
-  }, [cookies]);
+      setIsSignin(!!cook.cookies);
+  }, [cook]);
 
   return (
     <div className="bg-gray-900 z-0" id="home">
