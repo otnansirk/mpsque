@@ -2,10 +2,10 @@
 
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Dialog, DialogPanel } from '@headlessui/react'
-import { useCookies } from 'next-client-cookies'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import * as cookies from '@/libs/cookies'
 
 const navigation = [
   { name: 'Home', href: '#home' },
@@ -16,13 +16,8 @@ const navigation = [
 
 export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [isSignin, setIsSignin] = useState(false)
+  const isSignin = !!cookies.get("_Access_Token")
 
-  const cookies = useCookies()
-
-  useEffect(() => {
-    setIsSignin(!!cookies.get('_Access_Token'))
-  },[cookies])
   return (
     <div className="bg-gray-900 z-0" id="home">
       <header className="absolute inset-x-0 top-0 z-50">
